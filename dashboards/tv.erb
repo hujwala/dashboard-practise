@@ -1,0 +1,28 @@
+<script type='text/javascript'>
+$(function() {
+  // These settings override the defaults set in application.coffee. You can do this on a per dashboard basis.
+  Dashing.gridsterLayout('[{"col":1,"row":1},{"col":2,"row":1},{"col":3,"row":1},{"col":4,"row":1},{"col":5,"row":1},{"col":1,"row":2},{"col":2,"row":2},{"col":3,"row":2},{"col":4,"row":2},{"col":5,"row":2}]')
+  Dashing.widget_base_dimensions = [453, 370]
+  Dashing.numColumns = 5
+});
+</script>
+
+
+<div class="gridster">
+  <ul>
+  <li data-row="1" data-col="2" data-sizex="1" data-sizey="1">
+  <div data-id="jira" data-view="Number" data-title="Open Issues"></div>
+</li>
+  <li data-row="1" data-col="2" data-sizex="1" data-sizey="1">
+  <div data-id="jira_details" data-view="JiraDetails" data-title="Jira Details"></div>
+</li>
+  
+  <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+    <div data-view="PullRequests" data-id="AuthToken"></div>
+  </li>
+  <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+    <div data-id="github_status" data-view="TrafficLights"  data-title="GitHub"></div>
+  </li>
+    
+  </ul>
+</div>
