@@ -1,4 +1,3 @@
-
 require 'net/http'
 require 'json'
 require 'time'
@@ -6,13 +5,13 @@ require 'time'
 JIRA_URI = URI.parse("https://qwinix.atlassian.net")
 
 JIRA_AUTH = {
-  'name' => 'Ravi Shankar',
+  'name' => 'upatel',
   'password' => 'Qwinix123'
 }
 
 # the key of this mapping must be a unique identifier for your board, the according value must be the view id that is used in Jira
 view_mapping = {
-  'view1' => { :view_id => 61 }
+  'view1' => { :view_id => 73 }
 }
 
 # gets the view for a given view id
