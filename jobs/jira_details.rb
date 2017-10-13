@@ -1,20 +1,15 @@
-require 'jira'
-
-SCHEDULER.every '2m', :first_in => 0 do |job|
+require 'jira-ruby'
+require 'pry'
+SCHEDULER.every '10m', :first_in => 0 do |job|
   client = JIRA::Client.new({
-    :username => "upatel",
-    :password => "Qwinix",
-    :site => "qwinix.atlassian.net/secure/RapidBoard.jspa?rapidView=73&view=planning.nodetail",
+    :username => "upatel@qwinix.io",
+    :password => "Qwinix123",
+    :site => "https://qwinix.atlassian.net/secure/RapidBoard.jspa?rapidView=275",
     :auth_type => :basic,
     :context_path => ""
   })
 
+  closed_points = client.Issue.jql("sprint in openSprints() and status = \"Done\"").map{ |issue| issue.fields['customfield_10004'].to_f }.sum
 
-  closed_points = client.Issue.jql("sprint in openSprints() and status = \"Done\"").map{ |issue| issue.fields['customfield_10004'] }.reduce(:+) || 0
-  todo_points = client.Issue.jql("sprint in openSprints() and status = \"To Do\"").map{ |issue| issue.fields['customfield_10004'] }.reduce(:+) || 0
-  progress_points = client.Issue.jql("sprint in openSprints() and status = \"In Progress\"").map{ |issue| issue.fields['customfield_10004'] }.reduce(:+) || 0
-  qa_points = client.Issue.jql("sprint in openSprints() and status = \"Assign to QA\"").map{ |issue| issue.fields['customfield_10004'] }.reduce(:+) || 0
-  total_points = client.Issue.jql("sprint in openSprints()").map{ |issue| issue.fields['customfield_10004'] }.reduce(:+) || 0
-
-  send_event('jira_details', { title: "Jira Story Point Details", value: closed_points, total: total_points, progress: progress_points, todo: todo_points, qa: qa_points })
+  send_event('jira_details', { title: "Jira Story Point Details", value: closed_points })
 end

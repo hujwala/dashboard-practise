@@ -1,7 +1,8 @@
 require 'octokit'
+require 'pry'
 
-SCHEDULER.every '25m', :first_in => 0 do |job|
-  client = Octokit::Client.new(:access_token => "b1d3dfeb056ff5df332e08336910a29e2883923e")
+SCHEDULER.every '10m', :first_in => 0 do |job|
+  client = Octokit::Client.new(:access_token => "27642503f0c3f1bc8be77fe6d2142cbf274deab5")
   my_organization = "Qwinix"
   repos = client.organization_repositories(my_organization).map { |repo| repo.name }
 
@@ -19,3 +20,4 @@ SCHEDULER.every '25m', :first_in => 0 do |job|
 
   send_event('AuthToken', { header: "Open Pull Requests", pulls: open_pull_requests })
 end
+

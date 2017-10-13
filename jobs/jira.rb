@@ -1,11 +1,13 @@
-require 'jira'
- 
-host = "qwinix.atlassian.net/secure/RapidBoard.jspa?rapidView=73&view=planning.nodetail"
-username = "upatel"
+require 'jira-ruby'
+require 'pry'
+
+
+host = "https://qwinix.atlassian.net/secure/RapidBoard.jspa?rapidView=275&projectKey=BB3&view=detail"
+username = "upatel@qwinix.io"
 password = "Qwinix123"
- project = "Timesheet"
-status = "OPEN"
- 
+ project = "BB3"
+status = "IN PROGRESS"
+
 options = {
             :username => username,
             :password => password,
@@ -13,12 +15,12 @@ options = {
             :site     => host,
             :auth_type => :basic
           }
- 
-SCHEDULER.every '5m', :first_in => 0 do |job|
-  
+
+SCHEDULER.every '1s', :first_in => 0 do |job|
+
   client = JIRA::Client.new(options)
   num = 0;
- 
+
   client.Issue.jql("PROJECT = \"#{project}\" AND STATUS = \"#{status}\"").each do |issue|
       num+=1
   end
