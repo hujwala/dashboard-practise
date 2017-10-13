@@ -8,5 +8,6 @@ gem 'octokit'
 gem 'jira-ruby', :require => 'jira'
 gem 'spring'
 gem 'octokit'
+gem 'rails_12factor', group: :production
 
 gem 'pry'
